@@ -1,0 +1,23 @@
+{
+  "name": "sentry-discord",
+  "version": "1.0.0",
+  "description": "Routes Sentry Webhooks to Discord",
+  "author": {
+    "name": "Ian Mitchell",
+    "email": "ian.mitchel1@live.com",
+    "url": "http://ianmitchell.io"
+  },
+  "repository": "ianmitchell/sentry-discord",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro"
+  },
+  "dependencies": {
+    "dedent-js": "^1.0.1",
+    "micro": "^9.3.3",
+    "node-fetch": "^2.2.0",
+    "now-env": "^3.1.0",
+    "serve-handler": "^5.0.5"
+  }
+}

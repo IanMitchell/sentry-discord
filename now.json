@@ -1,0 +1,13 @@
+{
+  "name": "sentry-discord",
+  "alias": "sentry-discord",
+  "env": [
+    "WEBHOOK"
+  ],
+  "scale": {
+    "sfo1": {
+      "min": 1,
+      "max": 1
+    }
+  }
+}

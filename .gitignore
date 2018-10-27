@@ -1,0 +1,4 @@
+# Dependencies and Build
+node_modules
+now-secrets.json
+now-required.json
