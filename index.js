@@ -2,7 +2,6 @@ require('now-env');
 const { json } = require('micro');
 const handler = require('serve-handler');
 const fetch = require('node-fetch');
-const dedent = require('dedent-js');
 
 const COLORS = {
   'debug': parseInt('fbe14f', 16),
@@ -17,60 +16,52 @@ module.exports = async (request, response) => {
     return handler(request, response);
   }
 
-  const body = await json(request);
+  try {
+    const body = await json(request);
 
-  const payload = {
-    username: 'Sentry',
-    avatar_url: `${process.env.NOW_URL}/sentry-icon.png`,
-    embeds: [
-      {
-        title: body.project_name,
-        type: 'rich',
-        description: body.message,
-        url: body.url,
-        timestamp: (new Date(body.event.received * 1000)).toISOString(),
-        color: COLORS[body.level] || COLORS.error,
-        footer: {
-          icon_url: 'https://github.com/fluidicon.png',
-          text: 'ianmitchell/sentry-discord',
-        },
-        fields: [
-          {
-            name: `${body.event.template.filename}:${body.event.template.lineno}`,
-            value: dedent`
-              \`\`\`
-              ${body.event.template.context_line}
-              \`\`\`
-            `,
-          }
-        ]
-      }
-    ]
-  };
+    const payload = {
+      username: 'Sentry',
+      avatar_url: `${process.env.NOW_URL}/sentry-icon.png`,
+      embeds: [
+        {
+          title: body.project_name,
+          type: 'rich',
+          description: body.message,
+          url: body.url,
+          timestamp: (new Date(body.event.received * 1000)).toISOString(),
+          color: COLORS[body.level] || COLORS.error,
+          footer: {
+            icon_url: 'https://github.com/fluidicon.png',
+            text: 'ianmitchell/sentry-discord',
+          },
+          fields: []
+        }
+      ]
+    };
 
-  if (body.event.tags) {
-    payload.embeds[0].fields.push({
-      name: '**Tags**',
-      value: body.event.tags.map(([key, value]) => `${key}: ${value}`).join('\n'),
-      inline: true,
+    if (body.event.user) {
+      payload.embeds[0].fields.push({
+        name: '**User**',
+        value: body.event.user.username,
+      });
+    }
+
+    if (body.event.tags) {
+      body.event.tags.forEach(([key, value]) => {
+        payload.embeds[0].fields.push({
+          name: key,
+          value,
+          inline: true,
+        });
+      });
+    }
+
+    fetch(process.env.WEBHOOK, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'application/json' },
     });
+  } catch (err) {
+    console.error(err);
   }
-
-  if (body.event.user) {
-    payload.embeds[0].fields.push({
-      name: '**User**',
-      value: body.event.user.username,
-      inline: true,
-    });
-  }
-
-  console.log(payload.embeds[0].fields);
-
-  const val = await fetch(process.env.WEBHOOK, {
-    method: 'POST',
-    body: JSON.stringify(payload),
-    headers: { 'Content-Type': 'application/json' },
-  });
-
-  console.log(val);
 }
