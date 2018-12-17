@@ -1,6 +1,5 @@
 require('now-env');
 const { json } = require('micro');
-const handler = require('serve-handler');
 const fetch = require('node-fetch');
 
 const COLORS = {
