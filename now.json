@@ -1,14 +1,6 @@
 {
   "name": "sentry-discord",
-  "alias": "sentry-discord",
-  "version": 2,
-  "builds": [
-    {
-      "src": "index.js",
-      "use": "@now/node"
-    }
-  ],
   "env": {
-    "WEBHOOK": "@sentry-webhook"
+    "WEBHOOK": "@sentry-discord-webhook"
   }
 }

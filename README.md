@@ -1,23 +1,21 @@
 # sentry-discord
 
-This is a basic `micro` server that accepts an incoming [Sentry](https://sentry.io) webhook and transforms it to the format expected by [Discord](https://discordapp.com/).
+This is a basic Zeit Now Function that accepts an incoming [Sentry](https://sentry.io) webhook and transforms it to the format expected by [Discord](https://discordapp.com/).
 
-## Usage
+## Deploy
 
-This repository is configured to run with [Zeit Now](https://zeit.co/now).
+#### Create Discord Webhook and add to Secrets
 
-First you'll need to create a Discord Webhook in the channel you wish to send alerts to. Once you've created a webhook, clone this repository. Remove the
-
-```
-"alias": "sentry-discord",
-```
-
-line from `now.json` and run
+Step one is to create a new Discord Webhook to send the alerts to and add the domain to now secrets
 
 ```
-$ now
+now secrets add sentry-webhook-discord <WEBHOOK_URL>
 ```
 
-Now will prompt you for the Webhook URL - paste the Discord Webhook URL you created. After that, Now should give you the URL to your new deployment.
+#### Deploy!
 
-Finally, add a new Webhook alert to Sentry by pasting in the Now deployment URL. When you click `Test Plugin` on Sentry, you should receieve an alert on Discord.
+[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/ianmitchell/sentry-discord/tree/master)
+
+#### Add Webhook to Sentry
+
+Take the deployment URL and add it to the `Webhooks` section of your Sentry project. **You will need to add a `/api` to the domain.** The root URL will not work. Save the value and click "Test Plugin" - you should see an alert pop up in Discord!

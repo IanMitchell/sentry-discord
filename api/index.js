@@ -1,5 +1,3 @@
-require('now-env');
-const { json } = require('micro');
 const fetch = require('node-fetch');
 
 const COLORS = {
@@ -12,7 +10,7 @@ const COLORS = {
 
 module.exports = async (request, response) => {
   try {
-    const body = await json(request);
+    const { body } = request;
 
     const payload = {
       username: 'Sentry',
