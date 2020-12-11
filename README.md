@@ -9,7 +9,7 @@ This is a basic Zeit Now Function that accepts an incoming [Sentry](https://sent
 Step one is to create a new Discord Webhook to send the alerts to and add the domain to now secrets
 
 ```
-now secrets add sentry-webhook-discord <WEBHOOK_URL>
+now secrets add sentry-discord-webhook <WEBHOOK_URL>
 ```
 
 #### Deploy!
