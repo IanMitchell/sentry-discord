@@ -1,3 +1,11 @@
+# This service is deprecated!
+
+I created a hosted, updated version of this service which you can find at https://sentrydiscord.dev
+
+The repository can be found at [IanMitchell/sentrydiscord.dev](https://github.com/ianmitchell/sentrydiscord.dev)
+
+---
+
 # sentry-discord
 
 This is a basic Zeit Now Function that accepts an incoming [Sentry](https://sentry.io) webhook and transforms it to the format expected by [Discord](https://discordapp.com/).
