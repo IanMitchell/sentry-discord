@@ -6,6 +6,9 @@ The repository can be found at [IanMitchell/sentrydiscord.dev](https://github.co
 
 ---
 
+Previous README:
+
+```
 # sentry-discord
 
 This is a basic Zeit Now Function that accepts an incoming [Sentry](https://sentry.io) webhook and transforms it to the format expected by [Discord](https://discordapp.com/).
@@ -16,9 +19,7 @@ This is a basic Zeit Now Function that accepts an incoming [Sentry](https://sent
 
 Step one is to create a new Discord Webhook to send the alerts to and add the domain to now secrets
 
-```
-now secrets add sentry-discord-webhook <WEBHOOK_URL>
-```
+    now secrets add sentry-discord-webhook <WEBHOOK_URL>
 
 #### Deploy!
 
@@ -27,3 +28,4 @@ now secrets add sentry-discord-webhook <WEBHOOK_URL>
 #### Add Webhook to Sentry
 
 Take the deployment URL and add it to the `Webhooks` section of your Sentry project. **You will need to add a `/api` to the domain.** The root URL will not work. Save the value and click "Test Plugin" - you should see an alert pop up in Discord!
+```
